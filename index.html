@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatisierungs-Check – Flame KI | Welche Prozesse verschwenden Zeit?</title>
+  <meta name="description" content="Finde in 5 Minuten heraus, welche Prozesse in deinem Business du mit KI automatisieren kannst – kostenlos, Ergebnis sofort.">
+
+  <!-- Favicon + Theme -->
+  <link rel="icon" type="image/png" href="media/flame_logo_icon.png">
+  <link rel="apple-touch-icon" href="media/flame_logo_icon.png">
+  <meta name="theme-color" content="#212326">
+
+  <!-- SEO -->
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://quiz.startyourflame.de/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Flame KI">
+  <meta property="og:title" content="Automatisierungs-Check – Welche Prozesse in deinem Business verschwenden Zeit?">
+  <meta property="og:description" content="Finde in 5 Minuten heraus, welche Aufgaben du mit KI automatisieren kannst – und wie viel Zeit du jede Woche zurückgewinnen kannst.">
+  <meta property="og:image" content="https://quiz.startyourflame.de/media/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Flame KI Automatisierungs-Check">
+  <meta property="og:url" content="https://quiz.startyourflame.de/">
+  <meta property="og:locale" content="de_DE">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@startyourflame">
+  <meta name="twitter:title" content="Automatisierungs-Check – Welche Prozesse verschwenden Zeit?">
+  <meta name="twitter:description" content="Finde in 5 Minuten heraus, welche Aufgaben du mit KI automatisieren kannst.">
+  <meta name="twitter:image" content="https://quiz.startyourflame.de/media/og-image.png">
+
+  <link rel="stylesheet" href="funnel.css">
+  <style>
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: .6;
+    }
+
+    .hero-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 80px 0 100px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .hero-headline {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.12;
+      margin-bottom: 20px;
+      letter-spacing: -.02em;
+    }
+
+    .hero-headline em {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--ki-text);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      max-width: 480px;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .hero-meta-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .16em;
+      color: var(--ki-text);
+    }
+
+    .hero-meta-dot {
+      width: 3px;
+      height: 3px;
+      background: var(--ki-line);
+      border-radius: 50%;
+    }
+
+    /* ── Hero Right Panel ── */
+    .hero-panel {
+      background: var(--ki-mid);
+      border-top: 3px solid var(--gold);
+      padding: 40px;
+    }
+
+    .hero-panel-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .hero-panel-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--ki-line);
+    }
+    .hero-panel-item:last-child { border-bottom: none; }
+
+    .hero-panel-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .hero-panel-text {
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255,255,255,.8);
+      line-height: 1.5;
+    }
+
+    /* ── Problem Section ── */
+    .problem-section {
+      background: #1C1F22;
+      padding: 100px 0;
+      border-top: 1px solid var(--ki-line);
+    }
+
+    .problem-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 60px;
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    /* ── Numbers Row ── */
+    .numbers-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 80px;
+    }
+
+    .number-item {
+      background: var(--ki-mid);
+      padding: 36px 32px;
+      text-align: center;
+    }
+
+    .number-value {
+      font-family: 'DM Mono', monospace;
+      font-size: 40px;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .number-label {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--ki-text);
+      line-height: 1.5;
+    }
+
+    /* ── CTA Bottom ── */
+    .cta-bottom {
+      background: var(--ki-bg);
+      padding: 100px 0;
+      text-align: center;
+      border-top: 1px solid var(--ki-line);
+    }
+
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-body { padding: 60px 0 80px; }
+      .problem-grid, .numbers-row { grid-template-columns: 1fr; }
+      .hero-panel { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo Bar -->
+  <header class="logo-bar">
+    <a href="https://www.startyourflame.de/ki" target="_blank" rel="noopener">
+      <img src="media/flame_logo_main_white.png" alt="Flame KI" class="logo-img">
+    </a>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container">
+        <div class="hero-inner">
+
+          <!-- Left: Text -->
+          <div>
+            <span class="eyebrow anim-fade-up">Automatisierungs-Check</span>
+            <h1 class="hero-headline anim-fade-up-d1">
+              Welche Prozesse in deinem Business verschwenden täglich <em>Zeit?</em>
+            </h1>
+            <p class="hero-sub anim-fade-up-d2">
+              Finde in 5 Minuten heraus, welche Aufgaben du mit KI automatisieren kannst – und wie viel Zeit du jede Woche zurückgewinnen kannst.
+            </p>
+            <div class="anim-fade-up-d3">
+              <a href="quiz.html" class="btn-gold">Automatisierungs-Check starten</a>
+              <div class="hero-meta">
+                <span class="hero-meta-item">Kostenlos</span>
+                <span class="hero-meta-dot"></span>
+                <span class="hero-meta-item">5 Minuten</span>
+                <span class="hero-meta-dot"></span>
+                <span class="hero-meta-item">Ergebnis sofort</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Panel -->
+          <div class="hero-panel anim-fade-up-d2">
+            <div class="hero-panel-label">Was du herausfindest</div>
+            <div class="hero-panel-item">
+              <span class="hero-panel-num">01</span>
+              <span class="hero-panel-text">Deine größten Zeitfresser im Business</span>
+            </div>
+            <div class="hero-panel-item">
+              <span class="hero-panel-num">02</span>
+              <span class="hero-panel-text">Welche Prozesse konkret automatisiert werden können</span>
+            </div>
+            <div class="hero-panel-item">
+              <span class="hero-panel-num">03</span>
+              <span class="hero-panel-text">Wie viele Stunden pro Woche du einsparen könntest</span>
+            </div>
+            <div class="hero-panel-item">
+              <span class="hero-panel-num">04</span>
+              <span class="hero-panel-text">Eine individuelle Empfehlung für deinen nächsten Schritt</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Numbers -->
+  <section class="problem-section">
+    <div class="container">
+
+      <div class="numbers-row reveal">
+        <div class="number-item">
+          <div class="number-value">73%</div>
+          <div class="number-label">der Selbstständigen verbringen mehr als 10 Stunden pro Woche mit manuellen Prozessen</div>
+        </div>
+        <div class="number-item">
+          <div class="number-value">6–12h</div>
+          <div class="number-label">Zeit könnten die meisten Unternehmer durch gezielte Automatisierung pro Woche einsparen</div>
+        </div>
+        <div class="number-item">
+          <div class="number-value">3 von 5</div>
+          <div class="number-label">Prozessen in KMUs lassen sich heute einfach und günstig automatisieren</div>
+        </div>
+      </div>
+
+      <div class="problem-header reveal">
+        <span class="eyebrow">Das Problem</span>
+        <h2 class="section-headline">Die meisten Unternehmen verschwenden täglich Stunden mit manuellen Prozessen.</h2>
+        <div class="gold-line" style="margin: 20px auto;"></div>
+        <p class="section-subline" style="margin: 0 auto;">Nicht weil sie keine Wahl hätten – sondern weil sie nicht wissen, welche Prozesse wie einfach automatisiert werden können.</p>
+      </div>
+
+      <div class="problem-grid reveal">
+        <div class="problem-card">
+          <div class="problem-card-icon">01 / Angebote</div>
+          <div class="problem-card-title">Angebote manuell erstellen</div>
+          <div class="problem-card-text">Jedes Angebot wird von Grund auf neu geschrieben – mit Copy-paste, Formatieren und manuellem Versenden. Das kostet bei jedem Angebot 30–90 Minuten.</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-icon">02 / Termine</div>
+          <div class="problem-card-title">Terminabstimmung per E-Mail</div>
+          <div class="problem-card-text">E-Mails hin und her schreiben, um einen gemeinsamen Termin zu finden. Was 2 Minuten dauern könnte, wird zum Hin-und-her über mehrere Tage.</div>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-icon">03 / Onboarding</div>
+          <div class="problem-card-title">Manuelles Kunden-Onboarding</div>
+          <div class="problem-card-text">Jeder neue Kunde wird manuell eingeführt: Willkommens-Mail schreiben, Zugänge einrichten, Infos einholen. Das dauert Stunden, die du nicht hast.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Bottom CTA -->
+  <section class="cta-bottom">
+    <div class="container-narrow">
+      <span class="eyebrow reveal">Dein nächster Schritt</span>
+      <h2 class="section-headline reveal" style="max-width: 560px; margin: 0 auto 16px;">
+        Finde heraus, welche Prozesse in deinem Business automatisiert werden können.
+      </h2>
+      <div class="gold-line reveal" style="margin: 20px auto 32px;"></div>
+      <p class="section-subline reveal" style="margin: 0 auto 40px;">
+        In 5 Minuten bekommst du dein persönliches Effizienzprofil – mit konkreten Automatisierungsideen für dein Business.
+      </p>
+      <div class="reveal">
+        <a href="quiz.html" class="btn-gold">Automatisierungs-Check starten</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(el => {
+        if (el.isIntersecting) el.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>

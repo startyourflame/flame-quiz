@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dein Effizienzprofil – Automatisierungs-Check</title>
+    <!-- Favicon + Theme -->
+  <link rel="icon" type="image/png" href="media/flame_logo_icon.png">
+  <link rel="apple-touch-icon" href="media/flame_logo_icon.png">
+  <meta name="theme-color" content="#212326">
+
+  <!-- Funnel-Step: kein Suchmaschinenindex -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="stylesheet" href="funnel.css">
+  <style>
+    /* ── Hero ── */
+    .results-hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+    }
+
+    .results-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: .6;
+    }
+
+    .results-hero-headline {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .results-hero-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ki-text);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ── Score Section ── */
+    .score-section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--ki-line);
+    }
+
+    .score-inner {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .score-label-block {
+      flex: 1;
+    }
+
+    .score-interpretation {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .score-description {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--ki-text);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .score-meta-row {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .score-meta-item {
+      text-align: left;
+    }
+
+    .score-meta-value {
+      font-family: 'DM Mono', monospace;
+      font-size: 22px;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .score-meta-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--ki-text);
+    }
+
+    /* ── Top 3 Section ── */
+    .top3-section { padding: 80px 0; }
+
+    .top3-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+    }
+
+    /* ── Potential Banner ── */
+    .potential-banner {
+      background: var(--ki-mid);
+      border-top: 3px solid var(--gold);
+      padding: 48px;
+      text-align: center;
+      margin: 0 0 80px;
+    }
+
+    .potential-headline {
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .potential-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 52px;
+      color: var(--gold);
+      line-height: 1;
+      margin: 20px 0 8px;
+    }
+
+    .potential-sublabel {
+      font-size: 13px;
+      color: var(--ki-text);
+      margin-bottom: 6px;
+    }
+
+    .potential-yearly {
+      font-size: 12px;
+      font-family: 'DM Mono', monospace;
+      color: rgba(232,168,62,.6);
+      letter-spacing: .12em;
+    }
+
+    /* ── Industry Tips ── */
+    .industry-section { padding: 80px 0; border-top: 1px solid var(--ki-line); }
+
+    .industry-tips-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 40px;
+    }
+
+    .industry-tip-item {
+      background: var(--ki-mid);
+      padding: 28px 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .industry-tip-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .industry-tip-text {
+      font-size: 13px;
+      font-weight: 400;
+      color: rgba(255,255,255,.8);
+      line-height: 1.55;
+    }
+
+    /* ── Reality Check ── */
+    .reality-section {
+      padding: 80px 0;
+      border-top: 1px solid var(--ki-line);
+      background: #1C1F22;
+    }
+
+    .reality-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(20px, 2.5vw, 28px);
+      color: rgba(255,255,255,.75);
+      line-height: 1.5;
+      border-left: 3px solid var(--gold);
+      padding-left: 32px;
+      margin: 40px 0;
+    }
+
+    /* ── CTA Sections ── */
+    .cta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-top: 2px; }
+    .cta-single { margin-top: 2px; }
+
+    .cta-wrap { padding: 80px 0; border-top: 1px solid var(--ki-line); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .score-inner { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+      .score-ring-wrap { justify-content: center; }
+      .score-meta-row { justify-content: center; }
+      .top3-grid, .industry-tips-grid { grid-template-columns: 1fr; }
+      .cta-grid { grid-template-columns: 1fr; }
+      .potential-banner { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo Bar -->
+  <header class="logo-bar">
+    <a href="https://www.startyourflame.de/ki" target="_blank" rel="noopener">
+      <img src="media/flame_logo_main_white.png" alt="Flame KI" class="logo-img">
+    </a>
+  </header>
+
+  <!-- Hero -->
+  <section class="results-hero">
+    <div class="container">
+      <span class="eyebrow anim-fade-up">Dein Ergebnis</span>
+      <h1 class="results-hero-headline anim-fade-up-d1">Dein Effizienzprofil</h1>
+      <p class="results-hero-sub anim-fade-up-d2">
+        Basierend auf deinen Antworten haben wir analysiert, welche Prozesse in deinem Unternehmen aktuell das größte Automatisierungspotenzial haben.
+      </p>
+    </div>
+  </section>
+
+  <!-- Score -->
+  <section class="score-section">
+    <div class="container">
+      <div class="score-inner">
+
+        <!-- Ring -->
+        <div class="score-ring-wrap">
+          <svg class="score-ring-svg" width="160" height="160" viewBox="0 0 120 120">
+            <circle class="score-ring-track" cx="60" cy="60" r="52"/>
+            <circle class="score-ring-fill" id="scoreRingFill" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="score-ring-inner">
+            <div class="score-ring-number" id="scoreNumber">–</div>
+            <div class="score-ring-label">von 100</div>
+          </div>
+        </div>
+
+        <!-- Labels -->
+        <div class="score-label-block">
+          <span class="eyebrow">Dein Effizienz-Score</span>
+          <div class="score-interpretation" id="scoreInterpretation">–</div>
+          <p class="score-description" id="scoreDescription">–</p>
+          <div class="score-meta-row">
+            <div class="score-meta-item">
+              <div class="score-meta-value" id="metaWeekly">–</div>
+              <div class="score-meta-label">Stunden / Woche Potenzial</div>
+            </div>
+            <div class="score-meta-item">
+              <div class="score-meta-value" id="metaYearly">–</div>
+              <div class="score-meta-label">Stunden / Jahr Potenzial</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Top 3 Automation Opportunities -->
+  <section class="top3-section">
+    <div class="container">
+      <span class="eyebrow reveal">Deine größten Hebel</span>
+      <h2 class="section-headline reveal">Top 3 Automatisierungspotenziale</h2>
+      <div class="gold-line reveal"></div>
+      <p class="section-subline reveal">Diese drei Bereiche bieten dir das größte Potenzial, sofort Zeit zu sparen.</p>
+
+      <div class="top3-grid reveal" id="top3Grid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Potential Banner -->
+  <div class="container">
+    <div class="potential-banner reveal" id="potentialBanner">
+      <span class="eyebrow">Dein mögliches Effizienzpotenzial</span>
+      <p class="potential-sublabel">Wenn du diese drei Prozesse automatisierst, könntest du einsparen:</p>
+      <div class="potential-number" id="potentialWeekly">–</div>
+      <div class="potential-sublabel">Stunden pro Woche</div>
+      <div class="potential-yearly" id="potentialYearly">– Stunden pro Jahr</div>
+    </div>
+  </div>
+
+  <!-- Industry Tips -->
+  <section class="industry-section">
+    <div class="container">
+      <span class="eyebrow reveal">Branchenspezifisch</span>
+      <h2 class="section-headline reveal" id="industryHeadline">Typische Automatisierungen in deiner Branche</h2>
+      <div class="gold-line reveal"></div>
+
+      <div class="industry-tips-grid reveal" id="industryTipsGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Reality Check -->
+  <section class="reality-section">
+    <div class="container-narrow">
+      <span class="eyebrow reveal">Reality Check</span>
+      <h2 class="section-headline reveal">Warum viele Unternehmen Automatisierung unterschätzen</h2>
+      <div class="gold-line reveal"></div>
+      <div class="reality-quote reveal">
+        "Viele denken, Automatisierung sei kompliziert oder teuer. Dabei lassen sich die meisten zeitfressenden Prozesse heute mit einfachen Tools in wenigen Stunden automatisieren."
+      </div>
+      <p class="section-subline reveal">
+        Das Entscheidende ist nicht, ob du Entwickler bist – sondern ob du weißt, wo du anfangen sollst. Genau das zeigt dir dein Effizienzprofil.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTAs -->
+  <div class="cta-wrap">
+    <div class="container">
+
+      <!-- Consulting / Done-for-you CTA (conditional) -->
+      <div id="ctaConsulting" style="display:none; margin-bottom:2px;">
+        <div class="cta-section reveal">
+          <span class="eyebrow" style="display:block;margin-bottom:12px;">Persönliche Beratung</span>
+          <div class="cta-section-headline">Möchtest du deine Prozesse analysieren lassen?</div>
+          <p class="cta-section-text">
+            In einer kostenlosen Erstberatung schauen wir gemeinsam auf dein Business und identifizieren die drei größten Automatisierungshebel für dich.
+          </p>
+          <a href="https://calendly.com/ki-startyourflame/30min" target="_blank" rel="noopener" class="btn-gold">
+            Kostenlose Erstberatung anfragen
+          </a>
+        </div>
+      </div>
+
+      <!-- Course CTA (always) -->
+      <div id="ctaCourse">
+        <div class="cta-section reveal">
+          <span class="eyebrow" style="display:block;margin-bottom:12px;">Selbst umsetzen</span>
+          <div class="cta-section-headline">Lerne diese Prozesse selbst zu automatisieren</div>
+          <p class="cta-section-text">
+            Im Automatisierungs-Kurs zeigen wir dir Schritt für Schritt, wie du die wichtigsten Prozesse in deinem Business mit KI automatisierst – ohne technisches Vorwissen.
+          </p>
+          <ul class="benefit-list" style="display:inline-block;text-align:left;margin-bottom:28px;">
+            <li class="benefit-item"><span class="benefit-dot"></span>Konkrete Schritt-für-Schritt-Anleitungen</li>
+            <li class="benefit-item"><span class="benefit-dot"></span>Direkt auf dein Business anwendbar</li>
+            <li class="benefit-item"><span class="benefit-dot"></span>Keine technischen Vorkenntnisse nötig</li>
+          </ul>
+          <br>
+          <a href="automatisierungs-kurs.html" class="btn-gold">Mehr über den Kurs erfahren</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="funnel.js"></script>
+  <script src="ergebnis.js"></script>
+
+</body>
+</html>

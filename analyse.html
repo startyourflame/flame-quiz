@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analyse läuft – Automatisierungs-Check</title>
+    <!-- Favicon + Theme -->
+  <link rel="icon" type="image/png" href="media/flame_logo_icon.png">
+  <link rel="apple-touch-icon" href="media/flame_logo_icon.png">
+  <meta name="theme-color" content="#212326">
+
+  <!-- Funnel-Step: kein Suchmaschinenindex -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="stylesheet" href="funnel.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .analyse-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 0;
+    }
+
+    .analyse-card {
+      background: var(--ki-mid);
+      border-top: 3px solid var(--gold);
+      padding: 56px 64px;
+      width: 100%;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    .analyse-headline {
+      font-size: clamp(22px, 2.5vw, 30px);
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+
+    .analyse-subline {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--ki-text);
+      margin-bottom: 48px;
+      line-height: 1.65;
+    }
+
+    .analyse-steps {
+      text-align: left;
+    }
+
+    /* Spinner */
+    .analyse-spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid var(--ki-line);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      margin: 0 auto 40px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Done state: spinner → checkmark */
+    .analyse-spinner.done {
+      animation: none;
+      border-color: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+
+    @media (max-width: 768px) {
+      .analyse-card { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Logo Bar -->
+  <header class="logo-bar">
+    <a href="https://www.startyourflame.de/ki" target="_blank" rel="noopener">
+      <img src="media/flame_logo_main_white.png" alt="Flame KI" class="logo-img">
+    </a>
+  </header>
+
+  <main class="analyse-main">
+    <div class="container-narrow" style="width:100%;">
+      <div class="analyse-card">
+
+        <div class="analyse-spinner" id="spinner"></div>
+
+        <span class="eyebrow" style="display:block;margin-bottom:12px;">Effizienzprofil wird erstellt</span>
+        <h1 class="analyse-headline">Wir analysieren dein Business</h1>
+        <p class="analyse-subline">
+          Bitte einen Moment Geduld – wir berechnen gerade deine Automatisierungspotenziale.
+        </p>
+
+        <div class="analyse-steps" id="stepsWrap">
+          <div class="analyse-step" id="step0">
+            <div class="analyse-step-icon" id="icon0">→</div>
+            <span class="analyse-step-text">Analyse deiner Geschäftsprozesse</span>
+          </div>
+          <div class="analyse-step" id="step1">
+            <div class="analyse-step-icon" id="icon1">→</div>
+            <span class="analyse-step-text">Bewertung deiner Automatisierungspotenziale</span>
+          </div>
+          <div class="analyse-step" id="step2">
+            <div class="analyse-step-icon" id="icon2">→</div>
+            <span class="analyse-step-text">Berechnung deines Effizienz-Scores</span>
+          </div>
+          <div class="analyse-step" id="step3">
+            <div class="analyse-step-icon" id="icon3">→</div>
+            <span class="analyse-step-text">Identifikation deiner größten Zeithebel</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="funnel.js"></script>
+  <script>
+    // Redirect if no data
+    if (!window.FunnelData.loadData()) {
+      window.location.href = 'index.html';
+    }
+
+    const steps = [0, 1, 2, 3];
+    const delays = [400, 1100, 1900, 2700];
+    const REDIRECT_DELAY = 3800;
+
+    // Animate steps sequentially
+    steps.forEach((idx) => {
+      setTimeout(() => {
+        const stepEl = document.getElementById(`step${idx}`);
+        const iconEl = document.getElementById(`icon${idx}`);
+        if (stepEl) {
+          stepEl.classList.add('visible');
+          setTimeout(() => {
+            stepEl.classList.add('done');
+            if (iconEl) iconEl.textContent = '✓';
+          }, 500);
+        }
+      }, delays[idx]);
+    });
+
+    // Show done spinner
+    setTimeout(() => {
+      const spinner = document.getElementById('spinner');
+      spinner.classList.add('done');
+      spinner.textContent = '✓';
+    }, delays[3] + 600);
+
+    // Redirect
+    setTimeout(() => {
+      window.location.href = 'ergebnis.html';
+    }, REDIRECT_DELAY);
+  </script>
+
+</body>
+</html>
