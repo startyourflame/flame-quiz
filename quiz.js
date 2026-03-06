@@ -1,12 +1,44 @@
 'use strict';
 
+// ── Tracking ──
+// Make.com Webhook-URL hier eintragen, sobald das Szenario erstellt wurde.
+// Solange leer, passiert nichts (kein Fehler, kein Block).
+var WEBHOOK_URL = '';
+
+function generateSessionId() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+    var r = Math.random() * 16 | 0;
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
+
+function sendEvent(payload) {
+  if (!WEBHOOK_URL) return;
+  fetch(WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(function () {});
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-  const { QUESTIONS, saveData } = window.FunnelData;
+  const fd = window.FunnelData;
+  const { QUESTIONS, saveData, calculateScores, calculateTotalSavings } = fd;
   const TOTAL_QUESTIONS = QUESTIONS.length; // 11
 
   let currentStep = 0;
   let answers = {};
   let selectedOption = null;
+
+  // Session starten und tracken
+  var sessionId = generateSessionId();
+  sendEvent({
+    event: 'quiz_started',
+    session_id: sessionId,
+    started_at: new Date().toISOString(),
+    source_url: window.location.href,
+    referrer: document.referrer
+  });
 
   // ── Build Progress Bar ──
   function buildProgressBar() {
@@ -165,6 +197,33 @@ document.addEventListener('DOMContentLoaded', function () {
       website:     document.getElementById('website').value.trim(),
       lead_type:   answers.q11_implementation || 'explore_lead',
       timestamp:   new Date().toISOString()
+    });
+
+    // Scores berechnen und Lead-Event senden
+    var result  = calculateScores(data);
+    var savings = calculateTotalSavings(result.top3);
+    sendEvent({
+      event:                    'lead_captured',
+      session_id:               sessionId,
+      vorname:                  data.vorname,
+      nachname:                 data.nachname,
+      email:                    data.email,
+      unternehmen:              data.unternehmen,
+      website:                  data.website,
+      lead_type:                data.lead_type,
+      total_score:              Math.round(result.totalScore),
+      top3:                     result.top3.join(', '),
+      score_angebotsprozess:    result.scores.angebotsprozess,
+      score_terminbuchung:      result.scores.terminbuchung,
+      score_onboarding:         result.scores.onboarding,
+      score_marketing:          result.scores.marketing,
+      score_projektorganisation:result.scores.projektorganisation,
+      score_dokumentation:      result.scores.dokumentation,
+      savings_weekly:           savings.weekly,
+      savings_yearly:           savings.yearly,
+      q1_industry:              data.q1_industry,
+      q2_size:                  data.q2_size,
+      captured_at:              new Date().toISOString()
     });
 
     saveData(data);
