@@ -3,7 +3,7 @@
 // ── Tracking ──
 // Make.com Webhook-URL hier eintragen, sobald das Szenario erstellt wurde.
 // Solange leer, passiert nichts (kein Fehler, kein Block).
-var WEBHOOK_URL = '';
+var WEBHOOK_URL = 'https://hook.eu1.make.com/hjx9ndyarl9o1qbsgwydsco8j4pmu2u2';
 
 function generateSessionId() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
