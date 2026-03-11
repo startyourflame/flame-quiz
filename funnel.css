@@ -4,8 +4,7 @@
    Basiert auf flame-ki.html Designsystem
    ========================================================= */
 
-/* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&display=swap');
+/* Google Fonts – loaded via <link> in HTML for parallel fetching */
 
 /* ── Design Tokens ── */
 :root {
