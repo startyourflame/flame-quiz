@@ -17,7 +17,8 @@ function sendEvent(payload) {
   fetch(WEBHOOK_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
+    body: JSON.stringify(payload),
+    keepalive: true   // ensures request completes even after page navigation
   }).catch(function () {});
 }
 
